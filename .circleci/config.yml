@@ -1,35 +1,37 @@
 version: 2.1
 
-executors:
-  default:
-    docker:
-      - image: circleci/ruby:2.4.4
+orbs:
+  miyajan:
+    executors:
+      default:
+        docker:
+          - image: circleci/ruby:2.4.4
 
-commands:
-  sayhello:
-    parameters:
-      to:
-        type: string
-        default: "World"
-    steps:
-      - run: echo "Hello << parameters.to >>"
+    commands:
+      sayhello:
+        parameters:
+          to:
+            type: string
+            default: "World"
+        steps:
+          - run: echo "Hello << parameters.to >>"
 
-jobs:
-  hello:
-    executor: default
-    parameters:
-      to:
-        type: string
-        default: "World"
-    steps:
-      - sayhello:
-          to: << parameters.to >>
+    jobs:
+      hello:
+        executor: default
+        parameters:
+          to:
+            type: string
+            default: "World"
+        steps:
+          - sayhello:
+              to: << parameters.to >>
 
 workflows:
   version: 2
   main:
     jobs:
-      - hello
-      - hello:
+      - miyajan/hello
+      - miyajan/hello:
           to: "CircleCI"
 
