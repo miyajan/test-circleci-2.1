@@ -2,19 +2,30 @@ version: 2.1
 
 commands:
   sayhello:
+    parameters:
+      to:
+        type: string
+        default: "World"
     steps:
-      - run: echo "Hello World"
+      - run: echo "Hello << parameters.to >>"
 
 jobs:
   hello:
     docker:
       - image: circleci/ruby:2.4.4
+    parameters:
+      to:
+        type: string
+        default: "World"
     steps:
-      - sayhello
+      - sayhello:
+          to: << parameters.to >>
 
 workflows:
   version: 2
   main:
     jobs:
       - hello
+      - hello:
+          to: "CircleCI"
 
