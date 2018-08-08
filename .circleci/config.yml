@@ -5,7 +5,7 @@ orbs:
     executors:
       default:
         docker:
-          - image: circleci/ruby:1.4.2
+          - image: circleci/ruby:2.4.4
     commands:
       sayhello:
         description: "Hello!"
@@ -33,7 +33,7 @@ jobs:
         default: "World"
         type: string
     docker:
-      - image: circleci/ruby:1.4.2
+      - image: circleci/ruby:2.4.4
     steps:
       - run: echo "Hello << parameters.what >>"
 
