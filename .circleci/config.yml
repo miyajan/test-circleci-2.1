@@ -42,6 +42,4 @@ workflows:
   main:
     jobs:
       - sayhello
-      - sayhello:
-          to: "Hello CircleCI"
 
