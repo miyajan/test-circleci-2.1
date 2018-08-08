@@ -26,11 +26,22 @@ orbs:
           - sayhello:
               to: << parameters.to >>
 
+jobs:
+  sayhello:
+    parameters:
+      what:
+        default: "World"
+        type: string
+    docker:
+      - image: circleci/ruby:1.4.2
+    steps:
+      - run: echo "Hello << parameters.what >>"
+
 workflows:
   version: 2
   main:
     jobs:
-      - miyajan/hello
-      - miyajan/hello:
+      - sayhello
+      - sayhello:
           to: "Hello CircleCI"
 
